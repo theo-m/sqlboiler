@@ -3,6 +3,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -118,6 +119,8 @@ func main() {
 	viper.BindPFlags(rootCmd.PersistentFlags())
 	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 	viper.AutomaticEnv()
+
+	log.Println("Running the forked binary (github.com/theo-m/sqlboiler)")
 
 	if err := rootCmd.Execute(); err != nil {
 		if e, ok := err.(commandFailure); ok {

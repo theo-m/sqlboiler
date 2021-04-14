@@ -11,12 +11,7 @@
 To enable it:
 
 ```shell
-# build the local driver
-./boil.sh build psql
-# disable the upstream driver (remove from path)
-mv $GOPATH/bin/sqlboiler-psql $GOPATH/bin/sqlboiler-psql.backup
-# move the forked driver in the path
-ln -s $(pwd)/sqlboiler-psql $GOPATH/bin 
+./install-fork.sh
 ```
 
 ---

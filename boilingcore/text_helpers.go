@@ -145,7 +145,7 @@ func isPrimitive(typ string) bool {
 		return true
 	case "float32", "float64":
 		return true
-	case "byte", "rune", "string":
+	case "byte", "rune", "string", "uuid.UUID":
 		return true
 	}
 
