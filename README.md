@@ -6,6 +6,22 @@
 ![ActionsCI](https://github.com/volatiletech/sqlboiler/workflows/test/badge.svg)
 [![Go Report Card](https://goreportcard.com/badge/volatiletech/sqlboiler)](http://goreportcard.com/report/volatiletech/sqlboiler)
 
+# About this fork
+
+To enable it:
+
+```shell
+# build the local driver
+./boil.sh build psql
+# disable the upstream driver (remove from path)
+mv $GOPATH/bin/sqlboiler-psql $GOPATH/bin/sqlboiler-psql.backup
+# move the forked driver in the path
+ln -s $(pwd)/sqlboiler-psql $GOPATH/bin 
+```
+
+---
+
+
 SQLBoiler is a tool to generate a Go ORM tailored to your database schema.
 
 It is a "database-first" ORM as opposed to "code-first" (like gorm/gorp).
