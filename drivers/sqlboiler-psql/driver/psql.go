@@ -794,6 +794,9 @@ func (p PostgresDriver) Imports() (importers.Collection, error) {
 		"pgeo.NullCircle": {
 			ThirdParty: importers.List{`"github.com/volatiletech/sqlboiler/v4/types/pgeo"`},
 		},
+		"postgis.PointS": {
+			ThirdParty: importers.List{`"github.com/cridenour/go-postgis"`},
+		},
 	}
 
 	return col, nil
