@@ -495,6 +495,8 @@ func (p *PostgresDriver) TranslateColumnType(c drivers.Column) drivers.Column {
 				c.DBType = "hstore"
 			case "citext":
 				c.Type = "null.String"
+			case "geography":
+				c.Type = "postgis.PointS"
 			default:
 				c.Type = "string"
 				fmt.Fprintf(os.Stderr, "warning: incompatible data type detected: %s\n", c.UDTName)
@@ -556,6 +558,8 @@ func (p *PostgresDriver) TranslateColumnType(c drivers.Column) drivers.Column {
 				c.DBType = "hstore"
 			case "citext":
 				c.Type = "string"
+			case "geography":
+				c.Type = "postgis.PointS"
 			default:
 				c.Type = "string"
 				fmt.Fprintf(os.Stderr, "warning: incompatible data type detected: %s\n", c.UDTName)
