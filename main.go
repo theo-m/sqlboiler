@@ -118,7 +118,7 @@ func main() {
 	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 	viper.AutomaticEnv()
 
-	log.Println("Running the forked binary (github.com/theo-m/sqlboiler)")
+	log.Println("Running the forked binary (github.com/theo-m/sqlboiler) 🍾")
 
 	if err := rootCmd.Execute(); err != nil {
 		if e, ok := err.(commandFailure); ok {

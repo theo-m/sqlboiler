@@ -167,3 +167,59 @@ func (*{{$alias.DownSingular}}R) NewStruct() *{{$alias.DownSingular}}R {
 // {{$alias.DownSingular}}L is where Load methods for each relationship are stored.
 type {{$alias.DownSingular}}L struct{}
 {{end -}}
+
+// ID gathering methods for self and relations
+{{range $ind, $col := .Table.Columns -}}
+	{{- $colAlias := $alias.Column $col.Name -}}
+	{{if eq $colAlias "ID" -}}
+// Slice utils for identifying columns
+func (o *{{$alias.UpSingular}}Slice) Ids() []int {
+	ids := map[int]bool{}
+	for _, item := range *o {
+		ids[item.ID] = true
+	}
+
+	out := []int{}
+	for id, _ := range ids {
+		out = append(out, id)
+	}
+	return out
+}
+	{{- end}}
+	{{if eq $colAlias "UUID" -}}
+func (o *{{$alias.UpSingular}}Slice) Uuids() []uuid.UUID {
+	uuids := map[uuid.UUID]bool{}
+	for _, item := range *o {
+		uuids[item.UUID] = true
+	}
+
+	out := []uuid.UUID{}
+	for uid, _ := range uuids {
+		out = append(out, uid)
+	}
+	return out
+}
+	{{- end}}
+{{- end}}
+
+{{range $ind, $fk := .Table.FKeys -}}
+	{{- $colName := $alias.Column $fk.Column -}}
+func (o *{{$alias.UpSingular}}Slice) {{$colName}}s() []int {
+	ids := map[int]bool{}
+	for _, item := range *o {
+		{{if $fk.Nullable -}}
+		if item.{{$colName}}.Valid {
+			ids[item.{{$colName}}.Int] = true
+		}
+		{{- else}}
+		ids[item.{{$colName}}] = true
+		{{- end}}
+	}
+
+	out := []int{}
+	for id, _ := range ids {
+		out = append(out, id)
+	}
+	return out
+}
+{{end -}}
