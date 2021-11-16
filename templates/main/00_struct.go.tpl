@@ -199,19 +199,22 @@ func (o *{{$alias.UpSingular}}Slice) Uuids() []uuid.UUID {
 	}
 	return out
 }
-func (o *{{$alias.UpSingular}}Slice) IdMap() (out map[int]*{{$alias.UpSingular}}) {
+func (o *{{$alias.UpSingular}}Slice) IdMap() map[int]*{{$alias.UpSingular}} {
+    out := make(map[int]*{{$alias.UpSingular}}, len(*o))
 	for _, item := range *o {
 		out[item.ID] = item
 	}
 	return out
 }
-func (o *{{$alias.UpSingular}}Slice) UuidMap() (out map[uuid.UUID]*{{$alias.UpSingular}}) {
+func (o *{{$alias.UpSingular}}Slice) UuidMap() map[uuid.UUID]*{{$alias.UpSingular}} {
+    out := make(map[uuid.UUID]*{{$alias.UpSingular}}, len(*o))
 	for _, item := range *o {
 		out[item.UUID] = item
 	}
 	return out
 }
-func (o *{{$alias.UpSingular}}Slice) IntToUuidMap() (out map[int]uuid.UUID) {
+func (o *{{$alias.UpSingular}}Slice) IntToUuidMap() map[int]uuid.UUID {
+    out := make(map[int]uuid.UUID, len(*o))
 	for _, item := range *o {
 		out[item.ID] = item.UUID
 	}
