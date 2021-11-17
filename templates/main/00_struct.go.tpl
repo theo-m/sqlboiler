@@ -243,4 +243,17 @@ func (o *{{$alias.UpSingular}}Slice) {{$colName}}s() []int {
 	}
 	return out
 }
+func (o *{{$alias.UpSingular}}Slice) GroupBy{{$colName}}s() map[int]{{$alias.UpSingular}}Slice {
+	ids := map[int]{{$alias.UpSingular}}Slice{}
+	for _, item := range *o {
+		{{if $fk.Nullable -}}
+		if item.{{$colName}}.Valid {
+			ids[item.{{$colName}}.Int] = append(ids[item.{{$colName}}.Int], item)
+		}
+		{{- else}}
+		ids[item.{{$colName}}] = append(ids[item.{{$colName}}], item)
+		{{- end}}
+	}
+	return ids
+}
 {{end -}}
